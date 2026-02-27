@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<section
+  class="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12"
+>
+  <div class="w-full max-w-3xl bg-white rounded-2xl shadow-xl p-10">
+    <h2 class="text-2xl font-bold text-text-dark mb-6">Farm Details</h2>
+
+    <form class="grid md:grid-cols-2 gap-6" method="POST" action="/farmmer/verification">
+      {% csrf_token %}
+      <div>
+        <label class="text-sm font-medium text-gray-700">Farm Location</label>
+        <input
+          type="text"
+          class="w-full mt-2 rounded-lg border border-gray-300 px-4 py-3"
+        />
+      </div>
+
+      <div>
+        <label class="text-sm font-medium text-gray-700">Primary Crops</label>
+        <input
+          type="text"
+          class="w-full mt-2 rounded-lg border border-gray-300 px-4 py-3"
+        />
+      </div>
+
+      <div>
+        <label class="text-sm font-medium text-gray-700"
+          >Land Area (Acres)</label
+        >
+        <input
+          type="number"
+          class="w-full mt-2 rounded-lg border border-gray-300 px-4 py-3"
+        />
+      </div>
+
+      <div>
+        <label class="text-sm font-medium text-gray-700"
+          >Experience (Years)</label
+        >
+        <input
+          type="number"
+          class="w-full mt-2 rounded-lg border border-gray-300 px-4 py-3"
+        />
+      </div>
+
+      <div class="md:col-span-2">
+        <button
+          type="submit"
+          class="block w-full bg-primary text-white py-3 rounded-lg font-bold text-center hover:bg-primary-dark transition"
+        >
+          Continue to Verification
+      </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

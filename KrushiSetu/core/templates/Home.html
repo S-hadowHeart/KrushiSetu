@@ -1,0 +1,419 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+        <section class="@container">
+          <div class="p-4 md:p-6 lg:p-8">
+            <div
+              class="relative flex min-h-[500px] flex-col items-center justify-center gap-8 rounded-xl overflow-hidden bg-cover bg-center bg-no-repeat p-8 md:p-16 shadow-lg"
+              data-alt="Lush green farm fields in Gujarat during sunset"
+              style="
+                background-image:
+                  linear-gradient(
+                    rgba(16, 34, 16, 0.4) 0%,
+                    rgba(16, 34, 16, 0.7) 100%
+                  ),
+                  {% comment %} url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAX6SLTnnXZYvJdDUAqXelidUZs5HIBjo8qpxwS0zN1jrRpxU4fShJPBSiDXjU89w53sHveyVbYIk3LPkp3GHJA1K168PKqZUY7by7k71N9h7tWblr9HkYZ5QBMp0PnJxJOUjh1_mDa4rNTHffDUUwoXvS-g3bM1PK500yukzpHyGle7VdTQvh4NUWOJW4gDTC7X9pFaAPLFlvMTQ595MYK4cVxGAbILdt2EPfp-VzoSLXHjqcObKESd4XdMQ_uOWe4irgqM_v7_K0&quot;); {% endcomment %}
+                   url({% static 'images\home\farm.png' %});
+              "
+            >
+              <div class="flex max-w-3xl flex-col gap-4 text-center z-10">
+                <div
+                  class="inline-flex items-center justify-center gap-2 self-center rounded-full bg-white/20 backdrop-blur-sm px-4 py-1.5 text-xs font-bold text-white mb-2 border border-white/30"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >location_on</span
+                  >
+                  <span>Serving Rajkot, Amreli &amp; Junagadh</span>
+                </div>
+                <h1
+                  class="text-white text-4xl font-black leading-tight tracking-tight md:text-5xl lg:text-6xl drop-shadow-sm"
+                >
+                  Direct from Gujarat's Farms to Your Doorstep
+                </h1>
+                <h2
+                  class="text-gray-100 text-base font-medium leading-relaxed md:text-lg lg:text-xl max-w-2xl mx-auto drop-shadow-sm"
+                >
+                  India's most trusted zero-commission marketplace. Connect
+                  directly with verified farmers, bypass middlemen, and get the
+                  best prices for your produce.
+                </h2>
+              </div>
+              <div
+                class="flex flex-col sm:flex-row flex-wrap gap-4 z-10 w-full justify-center"
+              >
+                <a
+                  href='/farmmer/registration'
+                  class="group flex min-w-[160px] cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary hover:bg-primary-dark px-6 py-4 text-text-dark transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                >
+                  <span
+                    class="material-symbols-outlined group-hover:animate-bounce"
+                    >agriculture</span
+                  >
+                  <span class="text-base font-bold">Join as Farmer</span>
+            </a>
+                <a
+                href="/buyer/registration"
+                  class="group flex min-w-[160px] cursor-pointer items-center justify-center gap-2 rounded-lg bg-accent-orange hover:bg-orange-600 px-6 py-4 text-white transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                >
+                  <span class="material-symbols-outlined">shopping_basket</span>
+                  <span class="text-base font-bold">Join as Buyer</span>
+          </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Features Section -->
+        <section class="layout-container px-4 py-12 md:px-10 lg:px-20">
+          <div class="flex flex-col items-center gap-4 text-center mb-12">
+            <h2 class="text-text-dark text-3xl font-bold leading-tight">
+              Why Choose KrushiSetu?
+            </h2>
+            <p class="text-gray-600 max-w-lg">
+              We are committed to transparent agricultural trading that empowers
+              the kisan community.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            <!-- Feature 1 -->
+            <div
+              class="group flex flex-col gap-4 rounded-xl border border-primary/20 bg-white p-6 transition-all hover:border-primary/50 hover:shadow-md"
+            >
+              <div
+                class="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary-dark group-hover:bg-primary group-hover:text-text-dark transition-colors"
+              >
+                <span class="material-symbols-outlined text-[28px]"
+                  >currency_rupee</span
+                >
+              </div>
+              <div class="flex flex-col gap-2">
+                <h3 class="text-text-dark text-lg font-bold">
+                  Zero Commission
+                </h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Keep 100% of your hard-earned money. No hidden fees or
+                  platform charges for farmers.
+                </p>
+              </div>
+            </div>
+            <!-- Feature 2 -->
+            <div
+              class="group flex flex-col gap-4 rounded-xl border border-primary/20 bg-white p-6 transition-all hover:border-primary/50 hover:shadow-md"
+            >
+              <div
+                class="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary-dark group-hover:bg-primary group-hover:text-text-dark transition-colors"
+              >
+                <span class="material-symbols-outlined text-[28px]"
+                  >handshake</span
+                >
+              </div>
+              <div class="flex flex-col gap-2">
+                <h3 class="text-text-dark text-lg font-bold">Direct Trading</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Chat directly with buyers and sellers. Negotiate your own
+                  terms without middlemen intervention.
+                </p>
+              </div>
+            </div>
+            <!-- Feature 3 -->
+            <div
+              class="group flex flex-col gap-4 rounded-xl border border-primary/20 bg-white p-6 transition-all hover:border-primary/50 hover:shadow-md"
+            >
+              <div
+                class="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary-dark group-hover:bg-primary group-hover:text-text-dark transition-colors"
+              >
+                <span class="material-symbols-outlined text-[28px]"
+                  >verified_user</span
+                >
+              </div>
+              <div class="flex flex-col gap-2">
+                <h3 class="text-text-dark text-lg font-bold">
+                  Verified Profiles
+                </h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Trade with confidence. All participants undergo mandatory ID
+                  verification (Aadhar/Kisan Card).
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Live Market Preview -->
+        <section
+          class="bg-gray-50 py-16 px-4 md:px-10 lg:px-20 border-y border-gray-100"
+        >
+          <div class="layout-container mx-auto max-w-6xl">
+            <div class="flex items-center justify-between mb-8">
+              <div>
+                <h2
+                  class="text-text-dark text-2xl md:text-3xl font-bold leading-tight"
+                >
+                  Live Market Preview
+                </h2>
+                <p class="text-gray-500 mt-1 text-sm">
+                  Fresh listings from across Saurashtra
+                </p>
+              </div>
+              <a
+                class="hidden sm:flex items-center gap-1 text-primary-dark font-bold text-sm hover:underline"
+                href="#"
+              >
+                View All Markets
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <!-- Card 1 -->
+              <div
+                class="group flex flex-col rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-lg transition-all"
+              >
+                <div class="h-48 w-full bg-gray-200 relative">
+                  <img
+                    alt="Fresh harvested wheat crop"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    data-alt="Golden wheat grains close up"
+                    src="{% static 'test_images\home\wheat.png' %}"
+                    />
+                  <div
+                    class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-text-dark shadow-sm"
+                  >
+                    2 hrs ago
+                  </div>
+                </div>
+                <div class="p-4 flex flex-col flex-grow gap-2">
+                  <div class="flex justify-between items-start">
+                    <h3 class="font-bold text-text-dark text-lg">
+                      Wheat - Sharbati
+                    </h3>
+                    <span
+                      class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded"
+                      >Organic</span
+                    >
+                  </div>
+                  <div class="flex items-center gap-1 text-gray-500 text-xs">
+                    <span class="material-symbols-outlined text-[14px]"
+                      >location_on</span
+                    >
+                    <span>Gondal APMC</span>
+                  </div>
+                  <div
+                    class="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between"
+                  >
+                    <div>
+                      <p class="text-gray-400 text-xs font-medium">Price</p>
+                      <p class="text-accent-orange font-bold">
+                        ₹2,800
+                        <span class="text-xs font-normal text-gray-500"
+                          >/ Quintal</span
+                        >
+                      </p>
+                    </div>
+                    <button
+                      class="bg-primary/10 hover:bg-primary text-primary-dark hover:text-text-dark p-2 rounded-lg transition-colors"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >chat</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Card 2 -->
+              <div
+                class="group flex flex-col rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-lg transition-all"
+              >
+                <div class="h-48 w-full bg-gray-200 relative">
+                  <img
+                    alt="Raw cotton bolls on plant"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    data-alt="White fluffy cotton bolls ready for harvest"
+                    src="{% static 'test_images/home/cotten.png' %}"  
+                  />
+                </div>
+                <div class="p-4 flex flex-col flex-grow gap-2">
+                  <div class="flex justify-between items-start">
+                    <h3 class="font-bold text-text-dark text-lg">
+                      Cotton (Kapas)
+                    </h3>
+                  </div>
+                  <div class="flex items-center gap-1 text-gray-500 text-xs">
+                    <span class="material-symbols-outlined text-[14px]"
+                      >location_on</span
+                    >
+                    <span>Amreli, Gujarat</span>
+                  </div>
+                  <div
+                    class="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between"
+                  >
+                    <div>
+                      <p class="text-gray-400 text-xs font-medium">Price</p>
+                      <p class="text-accent-orange font-bold">
+                        ₹6,500
+                        <span class="text-xs font-normal text-gray-500"
+                          >/ Quintal</span
+                        >
+                      </p>
+                    </div>
+                    <button
+                      class="bg-primary/10 hover:bg-primary text-primary-dark hover:text-text-dark p-2 rounded-lg transition-colors"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >chat</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Card 3 -->
+              <div
+                class="group flex flex-col rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-lg transition-all"
+              >
+                <div class="h-48 w-full bg-gray-200 relative">
+                  <img
+                    alt="Heap of groundnuts"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    data-alt="Freshly harvested groundnuts peanuts pile"
+                    src="{% static 'test_images/home/groundnut.png' %}"  
+                  />
+                </div>
+                <div class="p-4 flex flex-col flex-grow gap-2">
+                  <div class="flex justify-between items-start">
+                    <h3 class="font-bold text-text-dark text-lg">
+                      Groundnut (Java)
+                    </h3>
+                  </div>
+                  <div class="flex items-center gap-1 text-gray-500 text-xs">
+                    <span class="material-symbols-outlined text-[14px]"
+                      >location_on</span
+                    >
+                    <span>Junagadh Yard</span>
+                  </div>
+                  <div
+                    class="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between"
+                  >
+                    <div>
+                      <p class="text-gray-400 text-xs font-medium">Price</p>
+                      <p class="text-accent-orange font-bold">
+                        ₹5,200
+                        <span class="text-xs font-normal text-gray-500"
+                          >/ Quintal</span
+                        >
+                      </p>
+                    </div>
+                    <button
+                      class="bg-primary/10 hover:bg-primary text-primary-dark hover:text-text-dark p-2 rounded-lg transition-colors"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >chat</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Card 4 -->
+              <div
+                class="group flex flex-col rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-lg transition-all"
+              >
+                <div class="h-48 w-full bg-gray-200 relative">
+                  <img
+                    alt="Red onions pile"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    data-alt="Pile of red onions at market"
+                    src="{% static 'test_images/home/onion.png' %}"  
+                  />
+                  <div
+                    class="absolute top-3 right-3 bg-accent-orange px-2 py-1 rounded text-xs font-bold text-white shadow-sm"
+                  >
+                    Hot
+                  </div>
+                </div>
+                <div class="p-4 flex flex-col flex-grow gap-2">
+                  <div class="flex justify-between items-start">
+                    <h3 class="font-bold text-text-dark text-lg">
+                      Red Onion (Nashik)
+                    </h3>
+                  </div>
+                  <div class="flex items-center gap-1 text-gray-500 text-xs">
+                    <span class="material-symbols-outlined text-[14px]"
+                      >location_on</span
+                    >
+                    <span>Mahuva, Bhavnagar</span>
+                  </div>
+                  <div
+                    class="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between"
+                  >
+                    <div>
+                      <p class="text-gray-400 text-xs font-medium">Price</p>
+                      <p class="text-accent-orange font-bold">
+                        ₹1,200
+                        <span class="text-xs font-normal text-gray-500"
+                          >/ 20kg</span
+                        >
+                      </p>
+                    </div>
+                    <button
+                      class="bg-primary/10 hover:bg-primary text-primary-dark hover:text-text-dark p-2 rounded-lg transition-colors"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >chat</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 text-center sm:hidden">
+              <a
+                class="inline-flex items-center gap-1 text-primary-dark font-bold text-sm hover:underline"
+                href="#"
+              >
+                View All Markets
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+          </div>
+        </section>
+        <!-- Testimonial/Trust Strip -->
+        <section class="bg-background-dark py-12 px-4 md:px-10">
+          <div
+            class="layout-container mx-auto flex flex-col md:flex-row items-center justify-center gap-12 text-white text-center md:text-left"
+          >
+            <div class="flex flex-col gap-1">
+              <h4 class="text-4xl font-bold text-primary">15,000+</h4>
+              <p class="text-gray-300 text-sm">Active Farmers</p>
+            </div>
+            <div class="hidden md:block h-12 w-px bg-white/10"></div>
+            <div class="flex flex-col gap-1">
+              <h4 class="text-4xl font-bold text-primary">₹20 Cr+</h4>
+              <p class="text-gray-300 text-sm">Trade Value Generated</p>
+            </div>
+            <div class="hidden md:block h-12 w-px bg-white/10"></div>
+            <div class="flex items-center gap-4 max-w-sm">
+              <div
+                class="size-12 rounded-full bg-gray-700 shrink-0 overflow-hidden"
+              >
+                <img
+                  alt="Indian farmer portrait"
+                  data-alt="Portrait of a smiling Indian man with a turban"
+                  src="{% static 'test_images/home/indianFarmmer.png' %}"
+                />
+              </div>
+              <div>
+                <p class="text-sm italic text-gray-200">
+                  "KrushiSetu helped me sell my cotton crop directly to a mill
+                  in Ahmedabad. Best rates I've ever got!"
+                </p>
+                <p class="text-xs font-bold text-primary mt-1">
+                  - Rajeshbhai Patel, Rajkot
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+{% endblock%}

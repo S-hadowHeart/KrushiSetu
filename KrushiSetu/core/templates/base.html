@@ -1,0 +1,207 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>KrushiSetu - Direct Farm to Table Marketplace</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#13ec13",
+              "primary-dark": "#0eb30e",
+              "accent-orange": "#f97316", // Warm orange for buyers
+              "background-light": "#f8fcf8",
+              "background-dark": "#102210",
+              "text-dark": "#0d1b0d",
+              "text-light": "#ffffff",
+            },
+            fontFamily: {
+              display: ["Work Sans", "sans-serif"],
+              sans: ["Work Sans", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              lg: "0.75rem",
+              xl: "1rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-text-dark antialiased overflow-x-hidden"
+  >
+    <div class="relative flex h-auto min-h-screen w-full flex-col">
+      <!-- Navbar -->
+      <header
+        class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-primary/20 bg-background-light/95 backdrop-blur-md px-6 py-4 lg:px-10"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="flex size-10 items-center justify-center rounded-lg bg-primary/20 text-primary-dark"
+          >
+            <span class="material-symbols-outlined text-3xl">agriculture</span>
+          </div>
+          <h2 class="text-text-dark text-xl font-extrabold tracking-tight">
+            KrushiSetu
+          </h2>
+        </div>
+        <div class="hidden md:flex flex-1 justify-end gap-8 items-center">
+          <nav class="flex items-center gap-6">
+            <!-- Home -->
+            <a
+              href="{% url 'home' %}"
+              class="text-sm font-semibold transition-colors {% if request.resolver_match.url_name == 'home' %} text-primary-dark font-bold {% else %} text-text-dark/80 hover:text-primary-dark {% endif %}"
+            >
+              Home
+            </a>
+
+            <!-- About -->
+            <a
+              href="{% url 'about' %}"
+              class="text-sm font-semibold transition-colors {% if request.resolver_match.url_name == 'about' %} text-primary-dark font-bold {% else %} text-text-dark/80 hover:text-primary-dark {% endif %}"
+            >
+              About
+            </a>
+
+            <!-- Contact -->
+            <a
+              href="{% url 'contactUs' %}"
+              class="text-sm font-semibold transition-colors {% if request.resolver_match.url_name == 'contactUs' %} text-primary-dark font-bold {% else %} text-text-dark/80 hover:text-primary-dark {% endif %}"
+            >
+              Contact
+            </a>
+
+            <div class="h-4 w-px bg-gray-300 mx-2"></div>
+
+            <!-- Login -->
+            <a
+              href="{% url 'login' %}"
+              class="text-sm font-semibold transition-colors {% if request.resolver_match.url_name == 'login' %} text-primary-dark font-bold {% else %} text-text-dark/80 hover:text-primary-dark {% endif %}"
+            >
+              Login
+            </a>
+
+            <!-- Register -->
+            <a
+              href="{% url 'registration' %}"
+              class="text-sm font-semibold transition-colors {% if request.resolver_match.url_name == 'registration' %} text-primary-dark font-bold {% else %} text-text-dark/80 hover:text-primary-dark {% endif %}"
+            >
+              Register
+            </a>
+          </nav>
+          <button
+            class="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 hover:bg-gray-50 transition-colors"
+          >
+            <span class="material-symbols-outlined text-gray-500 text-[20px]"
+              >language</span
+            >
+            <span class="text-text-dark text-xs font-bold">EN/GUJ</span>
+          </button>
+        </div>
+        <!-- Mobile Menu Icon -->
+        <button
+          class="md:hidden flex items-center justify-center p-2 text-text-dark"
+        >
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </header>
+      <main class="flex-grow">{% block content %} {% endblock %}</main>
+      <!-- footer -->
+      <footer class="bg-white border-t border-gray-200 py-10 px-6">
+        <div
+          class="layout-container mx-auto max-w-6xl flex flex-col md:flex-row justify-between gap-8"
+        >
+          <div class="flex flex-col gap-4 max-w-xs">
+            <div class="flex items-center gap-2">
+              <div
+                class="flex size-8 items-center justify-center rounded bg-primary text-text-dark"
+              >
+                <span class="material-symbols-outlined text-xl"
+                  >agriculture</span
+                >
+              </div>
+              <h2 class="text-text-dark text-lg font-bold tracking-tight">
+                KrushiSetu
+              </h2>
+            </div>
+            <p class="text-gray-500 text-sm">
+              Connecting Gujarat's agricultural ecosystem. Empowering farmers,
+              enabling buyers.
+            </p>
+          </div>
+          <div class="flex gap-16 flex-wrap">
+            <div class="flex flex-col gap-3">
+              <h5 class="font-bold text-text-dark text-sm">Platform</h5>
+              <a class="text-gray-500 text-sm hover:text-primary-dark" href="#"
+                >Browse Crops</a
+              >
+              <a class="text-gray-500 text-sm hover:text-primary-dark" href="#"
+                >Sell Produce</a
+              >
+              <a class="text-gray-500 text-sm hover:text-primary-dark" href="#"
+                >Market Rates</a
+              >
+            </div>
+            <div class="flex flex-col gap-3">
+              <h5 class="font-bold text-text-dark text-sm">Support</h5>
+              <a class="text-gray-500 text-sm hover:text-primary-dark" href="#"
+                >Help Center</a
+              >
+              <a class="text-gray-500 text-sm hover:text-primary-dark" href="#"
+                >Safety Tips</a
+              >
+              <a class="text-gray-500 text-sm hover:text-primary-dark" href="#"
+                >Contact Us</a
+              >
+            </div>
+            <div class="flex flex-col gap-3">
+              <h5 class="font-bold text-text-dark text-sm">Legal</h5>
+              <a class="text-gray-500 text-sm hover:text-primary-dark" href="#"
+                >Terms of Service</a
+              >
+              <a class="text-gray-500 text-sm hover:text-primary-dark" href="#"
+                >Privacy Policy</a
+              >
+            </div>
+          </div>
+        </div>
+        <div
+          class="layout-container mx-auto max-w-6xl mt-10 pt-6 border-t border-gray-100 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-gray-400 text-xs"
+        >
+          <p>© 2023 KrushiSetu. Made with ❤️ in Gujarat.</p>
+          <div class="flex gap-4 mt-4 md:mt-0">
+            <a class="hover:text-primary-dark transition-colors" href="#"
+              ><span class="material-symbols-outlined text-lg"
+                >social_leaderboard</span
+              ></a
+            >
+            <a class="hover:text-primary-dark transition-colors" href="#"
+              ><span class="material-symbols-outlined text-lg">public</span></a
+            >
+            <!-- Using public as a placeholder for twitter/x -->
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
