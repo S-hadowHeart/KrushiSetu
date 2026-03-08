@@ -1,28 +1,25 @@
-import { useState } from 'react'
-import { NavBar } from './component/navbar'
-import { Footer } from './component/footer'
-import { Route,Routes } from 'react-router-dom'
-import { Home } from './pages/home'
-import { About } from './pages/about'
-import { ContactUs } from './pages/contactUs'
+import AllRoute from "./route/allroute";
+import LoginRoute from "./route/loginroute";
+import { NavBar } from "./component/navbar";
+import { Footer } from "./component/footer";
+import { BrowserRouter,Routes,Route } from "react-router-dom";
+import { Error_404 } from "./pages/404";
+import { Register } from "./users/Registration/registration";
+import { RegisterRoute } from "./route/registerroute";
+
+
+
 
 function App() {
-
-
   return (
-    <>
-     
-    <NavBar/>
-    <Routes>
-      <Route path='/' element={ <Home/>} />
-      <Route path='about' element={ <About/> } />
-      <Route path='contactus' element={<ContactUs/>} />
-    </Routes>
-
-    <Footer/>
-
-    </>
-  )
+    <BrowserRouter>
+      <NavBar />
+      <AllRoute />
+      <LoginRoute />
+      <RegisterRoute/>
+      <Footer />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
