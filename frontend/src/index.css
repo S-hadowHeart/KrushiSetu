@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-paper text-field-900 font-sans antialiased;
+  background-image:
+    linear-gradient(180deg, rgba(15, 35, 26, 0.03) 0%, rgba(15, 35, 26, 0) 220px);
+}
+
+::selection {
+  @apply bg-mustard-300 text-field-900;
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid theme('colors.mustard.400');
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@layer components {
+  .field-label {
+    @apply block text-sm font-medium text-field-800 mb-1.5;
+  }
+
+  .field-input {
+    @apply w-full rounded-lg border border-field-200 bg-white px-3.5 py-2.5 text-[15px] text-field-900
+      placeholder:text-field-400 transition-colors
+      focus:border-field-500 focus:ring-2 focus:ring-field-100
+      disabled:bg-field-50 disabled:text-field-400;
+  }
+
+  .field-error {
+    @apply mt-1 text-sm text-rose-600;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold
+      transition-all disabled:opacity-50 disabled:pointer-events-none select-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-field-700 text-white hover:bg-field-800 shadow-soft active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply btn bg-white text-field-800 border border-field-200 hover:bg-field-50 active:scale-[0.98];
+  }
+
+  .btn-danger {
+    @apply btn bg-rose-600 text-white hover:bg-rose-700 active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-field-700 hover:bg-field-100;
+  }
+
+  .card {
+    @apply rounded-xl2 border border-field-100 bg-white shadow-soft;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full bg-field-50 text-field-700 border border-field-100
+      px-2.5 py-1 text-xs font-medium;
+  }
+
+  .page-shell {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+}

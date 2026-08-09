@@ -1,0 +1,163 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  FARMER
+  BUYER
+}
+
+model User {
+  id                  Int                  @id @default(autoincrement())
+  email               String               @unique
+  name                String
+  password            String
+  role                Role                 @default(FARMER)
+  verified            Boolean              @default(false)
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  refreshTokens       RefreshToken[]
+  passwordResetTokens PasswordResetToken[]
+  verifications       Verification[]
+  goods               Good[]
+  needs               Need[]
+  offersFrom          Offer[]              @relation("offer_from")
+  offersTo            Offer[]              @relation("offer_to")
+  messagesSent        Message[]            @relation("message_from")
+  messagesReceived    Message[]            @relation("message_to")
+  ratingsAuthored     Rating[]
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  tokenHash String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  expiresAt DateTime
+  revoked   Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  tokenHash String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Verification {
+  id          Int       @id @default(autoincrement())
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
+  idType      String
+  idNumber    String
+  attachments String[]  @default([])
+  status      String    @default("PENDING")
+  reviewedBy  Int?
+  reviewedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Good {
+  id            Int       @id @default(autoincrement())
+  publicId      String    @unique @default(uuid())
+  farmer        User      @relation(fields: [farmerId], references: [id])
+  farmerId      Int
+  name          String
+  images        String[]  @default([])
+  minQty        Float
+  maxQty        Float
+  priceMin      Float
+  priceMax      Float
+  locations     String[]  @default([])
+  deliveryModes String[]  @default([])
+  paymentModes  String[]  @default([])
+  description   String?
+  availableFrom DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  offers        Offer[]
+  ratings       Rating[]
+
+  @@index([farmerId]) // Index to help common queries
+}
+
+model Need {
+  id           Int       @id @default(autoincrement())
+  publicId     String    @unique @default(uuid())
+  buyer        User      @relation(fields: [buyerId], references: [id])
+  buyerId      Int
+  title        String
+  description  String?
+  qtyNeeded    Float
+  locations    String[]  @default([])
+  priceMin     Float?
+  priceMax     Float?
+  deliveryMode String?
+  paymentMode  String?
+  expiresAt    DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  offers       Offer[]
+}
+
+model Offer {
+  id            Int      @id @default(autoincrement())
+  fromUser      User     @relation("offer_from", fields: [fromUserId], references: [id])
+  fromUserId    Int
+  toUser        User     @relation("offer_to", fields: [toUserId], references: [id])
+  toUserId      Int
+  good          Good?    @relation(fields: [goodId], references: [id])
+  goodId        Int?
+  need          Need?    @relation(fields: [needId], references: [id])
+  needId        Int?
+  qty           Float?
+  price         Float?
+  message       String?
+  status        String   @default("PENDING")
+  parentOffer   Offer?   @relation("offer_counter", fields: [parentOfferId], references: [id])
+  parentOfferId Int?
+  counters      Offer[]  @relation("offer_counter")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Message {
+  id         Int       @id @default(autoincrement())
+  sender     User      @relation("message_from", fields: [senderId], references: [id])
+  senderId   Int
+  receiver   User      @relation("message_to", fields: [receiverId], references: [id])
+  receiverId Int
+  body       String
+  goodId     Int?
+  needId     Int?
+  offerId    Int?
+  readAt     DateTime?
+  createdAt  DateTime  @default(now())
+
+  @@index([senderId, receiverId])
+  @@index([receiverId, senderId])
+}
+
+model Rating {
+  id        Int      @id @default(autoincrement())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+  targetId  Int
+  type      String
+  score     Int
+  comment   String?
+  createdAt DateTime @default(now())
+  Good      Good?    @relation(fields: [goodId], references: [id])
+  goodId    Int?
+}
