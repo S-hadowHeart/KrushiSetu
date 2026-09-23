@@ -4,6 +4,10 @@
   - Made the column `name` on table `User` required. This step will fail if there are existing NULL values in that column.
 
 */
+UPDATE "User"
+SET "name" = COALESCE(NULLIF("name", ''), "email")
+WHERE "name" IS NULL OR "name" = '';
+
 -- AlterTable
 ALTER TABLE "User" ALTER COLUMN "name" SET NOT NULL;
 

@@ -4,8 +4,7 @@ const HttpError = require('../utils/httpError');
 
 async function register(req, res) {
   const { email, password, name, role } = req.body;
-  const normalizedRole = role ? String(role).toUpperCase() : 'FARMER';
-  const { user } = await authService.register({ email, password, name, role: normalizedRole });
+  const { user } = await authService.register({ email, password, name, role });
   res.status(201).json({
     ok: true,
     user: {

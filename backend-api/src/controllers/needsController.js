@@ -47,7 +47,7 @@ async function listNeeds(req, res) {
 
 async function getNeed(req, res) {
   const publicId = req.params.publicId;
-  const need = await prisma.need.findUnique({ where: { publicId }, include: { offers: true } });
+  const need = await prisma.need.findUnique({ where: { publicId } });
   if (!need) throw new HttpError(404, 'Need not found');
   const buyer = await prisma.user.findUnique({ where: { id: need.buyerId } });
   res.json({ need: { ...need, buyer: { id: buyer.id, name: buyer.name, verified: buyer.verified } } });

@@ -42,29 +42,32 @@ SMTP_HOST=smtp.example.com
 SMTP_PORT=587
 SMTP_USER=your_smtp_user
 SMTP_PASS=your_smtp_password
+SMTP_FROM="KrushiSetu <your_smtp_user>"
 ADMIN_EMAIL=admin@example.com
 ADMIN_PASSWORD=ChangeMe123!
 ```
 
 ## Getting started
 
-Install dependencies, generate Prisma client, run migrations, seed sample data, and start the dev server:
+Install dependencies, generate Prisma client, create the database structure, seed sample data, and start the dev server:
 
 ```bash
 cd backend-api
 npm install
 npx prisma generate
-npx prisma migrate dev --name init
-npm run seed
+npm run db:setup
 npm run dev
 ```
+
+`npm run db:setup` applies committed migrations and runs the idempotent seed. In production, set `ADMIN_EMAIL`, `ADMIN_PASSWORD`, and `JWT_SECRET` (at least 32 characters). Demo users are created during non-production seeding; set `SEED_DEMO_DATA=false` to disable them.
 
 ## Available scripts
 
 - `npm start` - run the production server
 - `npm run dev` - run the server with nodemon
 - `npm run prisma` - Prisma CLI helper
-- `npm run migrate` - apply database migrations
+- `npm run migrate` - create a development migration
+- `npm run db:setup` - apply migrations and seed the database
 - `npm run seed` - seed the database
 - `npm run format` - format Prisma schema
 

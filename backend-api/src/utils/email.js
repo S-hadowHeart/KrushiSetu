@@ -4,15 +4,26 @@ function createTransport() {
   const host = process.env.SMTP_HOST;
   const port = Number(process.env.SMTP_PORT || 587);
   const secure = port === 465;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS || process.env.SMTP_PASSWORD;
+
+  if (!host || !user || !pass) {
+    throw new Error('SMTP_HOST, SMTP_USER, and SMTP_PASS (or SMTP_PASSWORD) are required');
+  }
+
   return nodemailer.createTransport({
     host,
     port,
     secure,
     auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
+      user,
+      pass,
     },
   });
+}
+
+function getSenderAddress() {
+  return process.env.SMTP_FROM || process.env.SMTP_USER;
 }
 
 function getFrontendUrl(path) {
@@ -24,7 +35,7 @@ async function sendVerificationEmail(to, token) {
   const transport = createTransport();
   const url = `${getFrontendUrl('auth/verify')}?token=${encodeURIComponent(token)}`;
   const info = await transport.sendMail({
-    from: process.env.SMTP_USER,
+    from: getSenderAddress(),
     to,
     subject: 'KrushiSetu — Verify your email',
     text: `Please verify your account by visiting: ${url}`,
@@ -37,7 +48,7 @@ async function sendResetEmail(to, token) {
   const transport = createTransport();
   const url = `${getFrontendUrl('auth/reset-password')}#token=${encodeURIComponent(token)}`;
   const info = await transport.sendMail({
-    from: process.env.SMTP_USER,
+    from: getSenderAddress(),
     to,
     subject: 'KrushiSetu — Reset your password',
     text: `Reset your password: ${url}`,

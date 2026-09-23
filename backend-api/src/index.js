@@ -72,12 +72,34 @@ process.on('uncaughtException', (error) => {
 });
 
 const port = Number(process.env.PORT || 4000);
-app.listen(port, async () => {
-  console.log(`Server running on http://localhost:${port}`);
+
+async function start() {
   try {
     await prisma.$connect();
+    const server = app.listen(port, () => {
+      console.log(`Server running on http://localhost:${port}`);
+    });
+
+    const shutdown = async (signal) => {
+      console.log(`${signal} received, shutting down`);
+      server.close(async () => {
+        await prisma.$disconnect();
+        process.exit(0);
+      });
+    };
+
+    process.once('SIGINT', () => shutdown('SIGINT'));
+    process.once('SIGTERM', () => shutdown('SIGTERM'));
     console.log('Connected to database');
-  } catch (e) {
-    console.error('Failed connecting to DB', e.message);
+  } catch (error) {
+    console.error('Failed connecting to DB', error.message);
+    await prisma.$disconnect();
+    process.exitCode = 1;
   }
-});
+}
+
+if (require.main === module) {
+  start();
+}
+
+module.exports = { app, start };

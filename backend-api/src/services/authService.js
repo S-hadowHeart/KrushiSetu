@@ -25,7 +25,8 @@ async function register({ email, password, name, role }) {
   }
 
   const existing = await prisma.user.findUnique({ where: { email } });
-  const normalizedRole = role ? String(role).toUpperCase() : 'FARMER';
+  const requestedRole = String(role || 'FARMER').toUpperCase();
+  const normalizedRole = ['FARMER', 'BUYER'].includes(requestedRole) ? requestedRole : 'FARMER';
   if (existing) {
     throw new HttpError(400, 'Email already registered');
   }

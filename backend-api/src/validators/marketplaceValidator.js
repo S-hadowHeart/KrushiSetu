@@ -11,7 +11,7 @@ const createGoodSchema = z.object({
   deliveryModes: z.array(z.string()).optional(),
   paymentModes: z.array(z.string()).optional(),
   description: z.string().optional(),
-  availableFrom: z.string().optional(),
+  availableFrom: z.coerce.date().optional(),
 });
 
 const createNeedSchema = z.object({
@@ -23,7 +23,7 @@ const createNeedSchema = z.object({
   priceMax: z.number().nonnegative().optional(),
   deliveryMode: z.string().optional(),
   paymentMode: z.string().optional(),
-  expiresAt: z.string().optional(),
+  expiresAt: z.coerce.date().optional(),
 });
 
 const listGoodsSchema = z.object({
@@ -35,7 +35,7 @@ const listGoodsSchema = z.object({
   farmerId: z.string().optional(),
   page: z.string().optional(),
   limit: z.string().optional(),
-  sort: z.string().optional(),
+  sort: z.enum(['newest', 'oldest', 'price_low', 'price_high']).optional(),
 });
 
 module.exports = {

@@ -7,11 +7,18 @@
   - The required column `publicId` was added to the `Need` table with a prisma-level default value. This is not possible if the table is not empty. Please add this column as optional, then populate it before making it required.
 
 */
--- AlterTable
-ALTER TABLE "Good" ADD COLUMN     "publicId" TEXT NOT NULL;
+-- Add the columns as nullable so this migration also works on populated databases.
+ALTER TABLE "Good" ADD COLUMN "publicId" TEXT;
+UPDATE "Good"
+SET "publicId" = md5(random()::text || clock_timestamp()::text || "id"::text)
+WHERE "publicId" IS NULL;
+ALTER TABLE "Good" ALTER COLUMN "publicId" SET NOT NULL;
 
--- AlterTable
-ALTER TABLE "Need" ADD COLUMN     "publicId" TEXT NOT NULL;
+ALTER TABLE "Need" ADD COLUMN "publicId" TEXT;
+UPDATE "Need"
+SET "publicId" = md5(random()::text || clock_timestamp()::text || "id"::text)
+WHERE "publicId" IS NULL;
+ALTER TABLE "Need" ALTER COLUMN "publicId" SET NOT NULL;
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Good_publicId_key" ON "Good"("publicId");

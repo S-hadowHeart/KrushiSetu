@@ -11,7 +11,7 @@ const registerSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }).min(1),
   password: passwordSchema,
   name: z.string().min(1, { message: 'Name is required' }).max(128),
-  role: z.enum(['ADMIN', 'FARMER', 'BUYER']).optional(),
+  role: z.enum(['FARMER', 'BUYER']).default('FARMER'),
 });
 
 const loginSchema = z.object({

@@ -34,6 +34,9 @@ async function listGoods(req, res) {
   const where = {};
   if (q) where.name = { contains: q, mode: 'insensitive' };
   if (req.query.farmerId) where.farmerId = parseInt(req.query.farmerId, 10);
+  if (req.query.minPrice) where.priceMax = { gte: Number(req.query.minPrice) };
+  if (req.query.maxPrice) where.priceMin = { ...(where.priceMin || {}), lte: Number(req.query.maxPrice) };
+  if (req.query.deliveryMode) where.deliveryModes = { has: req.query.deliveryMode };
 
   // Postgres array `has` needs an exact element match, which makes location
   // search feel broken ("Pune" won't match "Pune, MH"). Do a case-insensitive
@@ -41,7 +44,17 @@ async function listGoods(req, res) {
   const location = req.query.location ? req.query.location.toLowerCase() : undefined;
 
   const [allMatching, total] = await Promise.all([
-    prisma.good.findMany({ where, orderBy: { createdAt: 'desc' } }),
+    prisma.good.findMany({
+      where,
+      orderBy:
+        req.query.sort === 'oldest'
+          ? { createdAt: 'asc' }
+          : req.query.sort === 'price_low'
+            ? { priceMin: 'asc' }
+            : req.query.sort === 'price_high'
+              ? { priceMin: 'desc' }
+              : { createdAt: 'desc' },
+    }),
     prisma.good.count({ where }),
   ]);
 
@@ -55,7 +68,7 @@ async function listGoods(req, res) {
 
 async function getGood(req, res) {
   const publicId = req.params.publicId;
-  const good = await prisma.good.findUnique({ where: { publicId }, include: { offers: true } });
+  const good = await prisma.good.findUnique({ where: { publicId } });
   if (!good) throw new HttpError(404, 'Good not found');
   const farmer = await prisma.user.findUnique({ where: { id: good.farmerId } });
   res.json({ good: { ...good, farmer: { id: farmer.id, name: farmer.name, verified: farmer.verified } } });

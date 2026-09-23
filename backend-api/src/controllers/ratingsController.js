@@ -3,7 +3,7 @@ const HttpError = require('../utils/httpError');
 
 async function createRating(req, res) {
   const data = req.body;
-  if (!data.targetId || !data.type || !data.score) throw new HttpError(400, 'Missing fields');
+  if (data.type === 'USER' && data.targetId === req.userId) throw new HttpError(400, "You can't rate yourself");
   const rating = await prisma.rating.create({ data: {
     authorId: req.userId,
     targetId: data.targetId,
